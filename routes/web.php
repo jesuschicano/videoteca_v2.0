@@ -21,3 +21,6 @@ Route::get('/', 'HomeController@index')->name('home');
 
 /* GENEROS */
 Route::resource('generos', 'GeneroController')->middleware('auth');
+
+/* PELICULAS */
+Route::resource('peliculas', 'PeliculasController')->middleware('auth');
