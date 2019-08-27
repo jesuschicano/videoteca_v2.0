@@ -18,3 +18,6 @@ Auth::routes([
     ]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
+/* GENEROS */
+Route::resource('generos', 'GeneroController')->middleware('auth');
