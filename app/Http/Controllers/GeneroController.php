@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Genero;
+use App\Pelicula;
 
 class GeneroController extends Controller
 {
@@ -14,8 +15,11 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        $generos = Genero::orderBy('genero', 'asc')->get();
-        return view('generos.index',['generos' => $generos]);
+        // $generos = Genero::orderBy('genero', 'asc')->get();
+        // return view('generos.index',['generos' => $generos]);
+
+        $data = Genero::withCount('peliculas')->orderBy('genero', 'asc')->get();
+        return view('generos.index', ['data' => $data]);
     }
 
     /**
