@@ -81,7 +81,10 @@ class PeliculasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pelicula = Pelicula::find($id);
+        $generos = Genero::orderBy('genero', 'asc')->get();
+
+        return view ('peliculas.edit', ['pelicula' =>  $pelicula, 'generos' => $generos]);
     }
 
     /**
@@ -93,7 +96,23 @@ class PeliculasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'title' => 'required|max:255',
+            'year' => 'required|size:4',
+            'duration' => 'required|digits_between:1,3',
+            'director' => 'required|max:255'
+        ];
+        $this->validate($request, $rules);
+
+        $p = Pelicula::find($id);
+        $p->titulo = $request->input('title');
+        $p->year = $request->input('year');
+        $p->duracion = $request->input('duration');
+        $p->director = $request->input('director');
+        $p->id_genero = $request->input('genero');
+        $p->save();
+
+        return redirect('peliculas/'.$id.'/edit')->with('status', 'Modificación guardada.');
     }
 
     /**

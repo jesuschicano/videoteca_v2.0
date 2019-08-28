@@ -22,7 +22,10 @@
                         <td>{{ $pelicula->duracion }}</td>
                         <td>{{ $pelicula->director }}</td>
                         <td>{{ $pelicula->genero->genero }}</td>
-                        <td></td>
+                        <td>
+                            <a href="{{ route('peliculas.edit', $pelicula->id) }}" class="btn btn-warning btn-sm">Editar
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
